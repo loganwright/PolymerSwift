@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
   spec.name         = 'PolymerSwift'
-  spec.version      = '0.1'
+  spec.version      = '0.2'
   spec.license      = 'MIT'
   spec.homepage     = 'https://github.com/LoganWright/PolymerSwift'
   spec.authors      = { 'Logan Wright' => 'logan.william.wright@gmail.com' }
   spec.summary      = 'Endpoint focused networking for iOS and OS X. Swift!'
-  spec.source       = { :git => 'https://github.com/LoganWright/PolymerSwift.git', :tag => '0.1' }
+  spec.source       = { :git => 'https://github.com/LoganWright/PolymerSwift.git', :tag => '0.2' }
   spec.source_files = 'PolymerSwift/Source/**/*.{swift}'
   spec.ios.deployment_target = "8.0"
   spec.osx.deployment_target = "10.9"
