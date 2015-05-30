@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Polymer
 
 class ViewController: UIViewController {
 
