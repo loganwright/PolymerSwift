@@ -38,30 +38,30 @@ public enum OperationType {
 
 public class EndpointDescriptor {
     
-    final private(set) var currentOperation: OperationType = .Get
+    public final private(set) var currentOperation: OperationType = .Get
     
     // MARK: Required Properties
     
-    var baseUrl: String { fatalError("Must Override") }
-    var endpointUrl: String { fatalError("Must Override") }
+    public var baseUrl: String { fatalError("Must Override") }
+    public var endpointUrl: String { fatalError("Must Override") }
     
     // MARK: Optional Properties
     
-    var responseKeyPath: String? { return nil }
-    var acceptableContentTypes: Set<String>? { return nil }
-    var headerFields: [String : AnyObject]? { return nil }
-    var requestSerializer: AFHTTPRequestSerializer? { return nil }
-    var responseSerializer: AFHTTPResponseSerializer? { return nil }
-    var shouldAppendHeaderToResponse: Bool { return false }
+    public var responseKeyPath: String? { return nil }
+    public var acceptableContentTypes: Set<String>? { return nil }
+    public var headerFields: [String : AnyObject]? { return nil }
+    public var requestSerializer: AFHTTPRequestSerializer? { return nil }
+    public var responseSerializer: AFHTTPResponseSerializer? { return nil }
+    public var shouldAppendHeaderToResponse: Bool { return false }
     
     // MARK: Response Transformer
     
-    var responseTransformer: ResponseTransformer? { return nil }
+    public var responseTransformer: ResponseTransformer? { return nil }
     
     // MARK: Slug Interaction
     
-    var slugValidityCheck: SlugValidityCheck? { return nil }
-    var slugValueForPath: SlugValueForPath? { return nil }
+    public var slugValidityCheck: SlugValidityCheck? { return nil }
+    public var slugValueForPath: SlugValueForPath? { return nil }
     
     // MARK: Initialization
     
@@ -74,7 +74,7 @@ public class Endpoint<T,U where T : EndpointDescriptor, U : GenomeObject> {
     
     // MARK: TypeAliases
     
-    typealias ResponseBlock = (response: Response<U>) -> Void
+    public typealias ResponseBlock = (response: Response<U>) -> Void
     private typealias ObjCResponseBlock = (result: AnyObject?, error: NSError?) -> Void
     
     // MARK: Private Properties
@@ -88,15 +88,15 @@ public class Endpoint<T,U where T : EndpointDescriptor, U : GenomeObject> {
     
     // MARK: Initialization
     
-    convenience init() {
+    public convenience init() {
         self.init(slug: nil, parameters: nil)
     }
     
-    convenience init(slug: AnyObject?) {
+    public convenience init(slug: AnyObject?) {
         self.init(slug: slug, parameters: nil)
     }
     
-    convenience init(parameters: PLYParameterEncodableType?) {
+    public convenience init(parameters: PLYParameterEncodableType?) {
         self.init(slug: nil, parameters: parameters)
     }
     
@@ -107,31 +107,31 @@ public class Endpoint<T,U where T : EndpointDescriptor, U : GenomeObject> {
     
     // MARK: Networking
     
-    func get(responseBlock: ResponseBlock) {
+    public func get(responseBlock: ResponseBlock) {
         descriptor.currentOperation = .Get
         let wrappedCompletion = objcResponseBlockForResponseBlock(responseBlock)
         ep.getWithCompletion(wrappedCompletion)
     }
     
-    func post(responseBlock: ResponseBlock) {
+    public func post(responseBlock: ResponseBlock) {
         descriptor.currentOperation = .Post
         let wrappedCompletion = objcResponseBlockForResponseBlock(responseBlock)
         ep.postWithCompletion(wrappedCompletion)
     }
     
-    func put(responseBlock: ResponseBlock) {
+    public func put(responseBlock: ResponseBlock) {
         descriptor.currentOperation = .Put
         let wrappedCompletion = objcResponseBlockForResponseBlock(responseBlock)
         ep.putWithCompletion(wrappedCompletion)
     }
     
-    func patch(responseBlock: ResponseBlock) {
+    public func patch(responseBlock: ResponseBlock) {
         descriptor.currentOperation = .Patch
         let wrappedCompletion = objcResponseBlockForResponseBlock(responseBlock)
         ep.putWithCompletion(wrappedCompletion)
     }
     
-    func delete(responseBlock: ResponseBlock) {
+    public func delete(responseBlock: ResponseBlock) {
         descriptor.currentOperation = .Delete
         let wrappedCompletion = objcResponseBlockForResponseBlock(responseBlock)
         ep.deleteWithCompletion(wrappedCompletion)
